@@ -24,4 +24,6 @@ df = sql_ctx.read.format("jdbc").options(
 df = spark.createDataFrame(df.toPandas())
 df = df.dropna().drop_duplicates()
 clean_rows = df.filter((length(col("novel_title")) > 3) & (length(col("chapter_title")) > 3) & (length(col("chapter_phrase")) > 12))
+
+#LOADING
 df.foreach(lambda x: load_in_database(x,db))
